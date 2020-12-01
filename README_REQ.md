@@ -49,9 +49,7 @@ Bonus points if you're able to:
 We can frame this challenge as follows:
 
 ```
-As a business owner
-I want to be able to view and manage the departments, roles, and employees in my company
-So that I can organize and plan my business
+As a business owner I want to be able to view and manage the departments, roles, and employees in my company So that I can organize and plan my business
 ```
 
 How do you deliver this? Here are some guidelines:
