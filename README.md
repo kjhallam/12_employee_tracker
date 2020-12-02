@@ -37,7 +37,7 @@ As a business owner I want to be able to view and manage the departments, roles,
 
 ## 📓 USAGE
 
-In the terminal run node index.js for a series of questions regarding the employeees.
+In the terminal run node index.js for a series of questions regarding the employees.
 
 ---
 
