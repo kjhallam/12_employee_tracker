@@ -27,7 +27,11 @@ As a business owner I want to be able to view and manage the departments, roles,
 
 ## ⬇️ INSTALLATION
 
-run node.js, npm i, npm i inquirer, npm i console table, & npm i mysql
+- npm i - install all files for npm to run
+- npm init - create a json package
+- npm i inquirer - uses inquirer to interact with the user through the command line
+- npm i console table - format tables
+- npm i mysql - connect to mySQL database
 
 ---
 
