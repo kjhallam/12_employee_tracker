@@ -19,7 +19,7 @@ connection.connect(function(err){
 })
 
   
-  function employees() {
+  function findAllEmployees() {
     connection.query("SELECT name FROM employee list", function(err, res) {
       if (err) throw err;
   

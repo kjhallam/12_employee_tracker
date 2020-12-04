@@ -47,39 +47,39 @@ const beginApp = () => {
         }
     })
 }
-
+//Display All employees
 const showAll = () =>{
-
+// TODO: connect to database - (2) query/retrieve data from employee table (3) display data from employee in a table (4) display questions again 
 }
-
+//View by department
 const showByDept = () =>{
 
 }
-
+// View by the manager selection
 const showByMgr = () =>{
 
 }
-
+// Insert a new Employee
 const addEmployee = () =>{
-
+//TODO's INSERT - Prompt input 
 }
-
+// Delete an Employee
 const removeEmployee = () =>{
-
+//TODO's DELETE - Prompt input 
 }
-
+// Update Employee Role
 const updateRole = () =>{
 
 }
-
+// Update Employee Manager
 const updateEmpMgr = () =>{
 
 }
-
+// Insert a new Department
 const addDept = () =>{
 
 }
-
+// Insert a new Role
 const addRole = () =>{
 
 }
