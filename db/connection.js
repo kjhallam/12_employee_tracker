@@ -15,17 +15,17 @@ const connection = mysql.createConnection({
 connection.connect(function(err){
     if (err) throw err;
     console.log('connected as id ' + connect.threadId);
-    employees();
+    beginApp()
+    //employees();
 })
 
   
-  function findAllEmployees() {
-    connection.query("SELECT name FROM employee list", function(err, res) {
-      if (err) throw err;
+  // function findAllEmployees() {
+  //   connection.query("SELECT name FROM employee list", function(err, res) {
+  //     if (err) throw err;
   
-      // Log all results of the SELECT statement
-      console.log(res);
-      connection.end();
-    });
-  }
+  //     console.log(res);
+  //     connection.end();
+  //   });
+  // }
   

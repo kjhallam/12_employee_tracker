@@ -1,15 +1,15 @@
 USE employee_tracker;
 
-INSERT INTO department (name)
+INSERT INTO department(title)
 VALUES
-	  ('Managment')
+	  ('Management')
 	, ('Sales')
     , ('Art')
     , ('Accounting')
     , ('Human Resources')
     , ('Programming');
     
-INSERT INTO role (title, salary, department_id)
+INSERT INTO role(title, salary, department_id)
 VALUES
 	  ('Regional Manager', 120000, 1)
     , ('Sales Rep', 68000, 2)
@@ -22,9 +22,12 @@ INSERT INTO employee(first_name, last_name, role_id)
 VALUES
   ('Janet', 'Riggin', 1)
 , ('Tiffani', 'Kicksey', 6)
-, ('James', 'Jameson', 7)
-, ('Jill', 'Croston', 5)
+, ('James', 'Jameson', 4)
+, ('Toni', 'Reeves', 5)
 , ('Toby', 'Majors', 3)
-, ('Darrel', 'Thomas', 2);
+, ('Derrick', 'Thomas', 2);
 
 UPDATE `employee_tracker`.`employee` SET `manager_id` = '1' WHERE (`id` > '1');
+SELECT * FROM employee;
+SELECT * FROM role;
+SELECT * FROM department
