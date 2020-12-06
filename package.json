@@ -1,26 +1,18 @@
 {
-  "name": "12_employee_tracker",
+  "name": "db",
   "version": "1.0.0",
-  "description": "![Badge](https://img.shields.io/badge/license-MIT-brightgreen)",
-  "main": "index.js",
-  "dependencies": {
-    "console.table": "^0.10.0",
-    "inquirer": "^7.3.3",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {},
+  "description": "",
+  "main": "connection.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kjhallam/12_employee_tracker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kjhallam/12_employee_tracker/issues"
-  },
-  "homepage": "https://github.com/kjhallam/12_employee_tracker#readme"
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
 }
