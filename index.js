@@ -14,6 +14,7 @@ const beginApp = () => {
         choices: beginScreen
     
     }).then((answer) => {
+        // findAllEmployees();
         switch(answer.selectMenu) {
             case 'View all Employees':
                 showAll();
@@ -63,7 +64,7 @@ const showByDept = () =>{
         beginApp();
     })
 }
-// Insert a new Employee
+//Insert a new Employee
 const addEmployee = () =>{
     inquirer.prompt([{
             type: 'input',
@@ -93,7 +94,7 @@ const addEmployee = () =>{
     })
 }
 
-    // Delete an Employee
+// Delete an Employee
 const removeEmployee = () =>{
     inquirer.prompt([
         {
@@ -110,7 +111,7 @@ const removeEmployee = () =>{
         })
     })
 }
-// Update Employee Role
+//Update Employee Role
 const updateRole = () => {
     inquirer.prompt([
     {
@@ -130,4 +131,6 @@ const updateRole = () => {
         })
         beginApp();
     })
-}
+ }
+
+beginApp();
