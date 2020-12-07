@@ -48,7 +48,7 @@ const beginApp = () => {
 }
 
 //Display All employees
-const showAll = () =>{
+const showAll = () => {
     connection.query('SELECT * FROM department, role, employee', (err, results) => {
         //if (err) throw err;
         console.log(results);
@@ -57,7 +57,7 @@ const showAll = () =>{
 }
 
 //View by department
-const showByDept = () =>{
+const showByDept = () => {
     connection.query('SELECT * FROM department', (err, results) => {
         if (err) throw err;
         console.log(results);
@@ -65,7 +65,7 @@ const showByDept = () =>{
     })
 }
 //Insert a new Employee
-const addEmployee = () =>{
+const addEmployee = () => {
     inquirer.prompt([{
             type: 'input',
             message: "What's the employees first name?",
@@ -89,13 +89,13 @@ const addEmployee = () =>{
     ]).then((res) => {
         connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [res.firstName, res.lastName, res.roleID, res.managerID], function (err, results){
             if (err) throw err;
-            consTable("Successfully Inserted");
+            console.table("Successfully Inserted");
         })
     })
 }
 
 // Delete an Employee
-const removeEmployee = () =>{
+const removeEmployee = () => {
     inquirer.prompt([
         {
         type: "input",
@@ -132,5 +132,80 @@ const updateRole = () => {
         beginApp();
     })
  }
+// Update Employee Manager
+const updateEmpMgr = () => {
+    inquirer.prompt([
+    {
+        type: "input",
+        message: "Which manager needs updated?",
+        name: "name"
+    },
+    {
+        type: "number",
+        message: "Enter the new manager ID",
+        name: "manager_id"
+    }
+    ]).then(function(response) {
+        connection.query("UPDATE `employee_tracker`.`employee` SET `manager_id` = ? WHERE (`id` ?", [response.name, response.manager_id], function (err, results) {
+            consTable(results);
+        })
+        beginApp();
+    })
+}
+
+const addDept = () => {
+    inquirer.prompt([
+    {
+        type: 'input',
+        message: "Enter the new Department ID",
+        name: 'department_id',
+    },
+    {
+        type: 'input',
+        message: "What is the Manager's title?",
+        name: 'title',
+    },
+
+]).then((res) => {
+    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?,)', [res.id, res.title], function (err, results){
+        if (err) throw err;
+        consTable("Successfully Inserted");
+        beginApp();
+    })
+
+})
+}
+
+const addRole = () => {
+    inquirer.prompt([
+    {
+        type: 'input',
+        message: "Enter the new role ID",
+        name: 'role_id',
+    },
+    {
+        type: 'input',
+        message: "What is the Manager's title?",
+        name: 'title',
+    },
+    {
+        type: 'input',
+        message: "Enter the new salary",
+        name: "salary"
+    },
+    {
+        type: 'input',
+        message: "Enter the new department ID",
+        name: "department_id"
+    },
+
+]).then((res) => {
+    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?, ?, ?)', [res.id, res.title, res.salary, res.department_id], function (err, results){
+        if (err) throw err;
+        consTable("Successfully Inserted");
+    })
+    beginApp();
+})
+}
 
 beginApp();
