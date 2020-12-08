@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-const consTable = require('console.table');
+const table = require('console-table-printer');
 const connection = require('./db/connection');
-const beginScreen = ['View all Employees', 'View all Employees', 'Add Employee', 'Remove Employee', 'Update Employee Role', 'Add Department', 'Add Role', 'Exit']
+const beginScreen = ['View all Employees', 'View all Departments', 'View all Roles', 'Add Employee', 'Add Role', 'Add Department','Remove Employee', 'Update Employee Role', 'Exit']
 
 
 
@@ -19,8 +19,11 @@ const beginApp = () => {
             case 'View all Employees':
                 showAll();
                 break;
-            case 'View all Employees by Department':
+            case 'View all Departments':
                 showByDept();
+                break;
+            case 'View all Roles':
+                showByRole();
                 break;
             case 'Add Employee':
                 addEmployee();
@@ -47,23 +50,40 @@ const beginApp = () => {
     })
 }
 
+
 //Display All employees
 const showAll = () => {
-    connection.query('SELECT * FROM department, role, employee', (err, results) => {
-        //if (err) throw err;
-        console.log(results);
+    connection.query('SELECT * FROM employee', 
+    (err, res) => {
+        if (err) throw err;
+        table.printTable(res);
+        console.log('All Employees');
         beginApp();
     })
 }
 
 //View by department
 const showByDept = () => {
-    connection.query('SELECT * FROM department', (err, results) => {
+    connection.query('SELECT * FROM department',
+    (err, res) => {
         if (err) throw err;
-        console.log(results);
+        table.printTable(res);
+        console.log('All Departments');
         beginApp();
     })
 }
+
+//View by Role
+const showByRole = () => {
+    connection.query('SELECT * FROM role',
+    (err, res) => {
+        if (err) throw err;
+        table.printTable(res);
+        console.log('All Roles');
+        beginApp();
+    })
+}
+
 //Insert a new Employee
 const addEmployee = () => {
     inquirer.prompt([{
@@ -87,9 +107,11 @@ const addEmployee = () => {
             name: 'managerID',
         }
     ]).then((res) => {
-        connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [res.firstName, res.lastName, res.roleID, res.managerID], function (err, results){
+        connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [res.firstName, res.lastName, res.roleID, res.managerID], function (err, res){
             if (err) throw err;
-            console.table("Successfully Inserted");
+            console.log("Successfully Inserted");
+            console.log(" ");
+            beginApp();
         })
     })
 }
@@ -104,9 +126,10 @@ const removeEmployee = () => {
         }
     ]).then((res) => {
         connection.query('DELETE FROM employee WHERE (?);', [res.employee], 
-        function(err, results){
+        function(err, res){
             if (err) throw err;
             console.log("Successfully Deleted");
+            console.log(" ");
         beginApp();
         })
     })
@@ -126,10 +149,10 @@ const updateRole = () => {
     }
 ]).then(function(response) {
     connection.query("UPDATE employee SET role_id = ? WHERE first_name = ?", [response.role_id, response.name],
-        function (err, data) {
-            consTable(results);
+        function (err, res) {
+            table.printTable(res);
+            beginApp();
         })
-        beginApp();
     })
  }
 // Update Employee Manager
@@ -146,8 +169,8 @@ const updateEmpMgr = () => {
         name: "manager_id"
     }
     ]).then(function(response) {
-        connection.query("UPDATE `employee_tracker`.`employee` SET `manager_id` = ? WHERE (`id` ?", [response.name, response.manager_id], function (err, results) {
-            consTable(results);
+        connection.query("UPDATE `employee_tracker`.`employee` SET `manager_id` = ? WHERE (`id` ?", [response.name, response.manager_id], function (err, res) {
+           console.log("Successfully Updated");
         })
         beginApp();
     })
@@ -157,19 +180,14 @@ const addDept = () => {
     inquirer.prompt([
     {
         type: 'input',
-        message: "Enter the new Department ID",
-        name: 'department_id',
-    },
-    {
-        type: 'input',
-        message: "What is the Manager's title?",
-        name: 'title',
+        message: "Enter the new Department Name",
+        name: 'department_name',
     },
 
 ]).then((res) => {
-    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?,)', [res.id, res.title], function (err, results){
+    connection.query('INSERT INTO department (department_name) VALUES (?)', [res.department_name], function (err, res){
         if (err) throw err;
-        consTable("Successfully Inserted");
+        console.log("Department Successfully Added");
         beginApp();
     })
 
@@ -200,9 +218,9 @@ const addRole = () => {
     },
 
 ]).then((res) => {
-    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?, ?, ?)', [res.id, res.title, res.salary, res.department_id], function (err, results){
+    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?, ?, ?)', [res.id, res.title, res.salary, res.department_id], function (err, res){
         if (err) throw err;
-        consTable("Successfully Inserted");
+        console.log("Role Successfully Added");
     })
     beginApp();
 })
