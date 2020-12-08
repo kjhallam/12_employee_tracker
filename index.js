@@ -144,7 +144,7 @@ const updateRole = () => {
     },
     {
         type: "number",
-        message: "Enter new role ID",
+        message: "Enter new role ID: ",
         name: "role_id"
     }
 ]).then(function(response) {
@@ -165,7 +165,7 @@ const updateEmpMgr = () => {
     },
     {
         type: "number",
-        message: "Enter the new manager ID",
+        message: "Enter the new manager ID: ",
         name: "manager_id"
     }
     ]).then(function(response) {
@@ -180,7 +180,7 @@ const addDept = () => {
     inquirer.prompt([
     {
         type: 'input',
-        message: "Enter the new Department Name",
+        message: "Enter the new Department Name: ",
         name: 'department_name',
     },
 
@@ -198,31 +198,25 @@ const addRole = () => {
     inquirer.prompt([
     {
         type: 'input',
-        message: "Enter the new role ID",
-        name: 'role_id',
-    },
-    {
-        type: 'input',
-        message: "What is the Manager's title?",
+        message: "Enter the new role: ",
         name: 'title',
     },
     {
         type: 'input',
-        message: "Enter the new salary",
-        name: "salary"
+        message: "Enter the salary: ",
+        name: 'salary',
     },
     {
         type: 'input',
-        message: "Enter the new department ID",
-        name: "department_id"
+        message: "Enter the Department ID: ",
+        name: 'department_id',
     },
-
 ]).then((res) => {
-    connection.query('INSERT INTO department (department_id, title) VALUES (?, ?, ?, ?)', [res.id, res.title, res.salary, res.department_id], function (err, res){
+    connection.query('INSERT INTO role (title, salary, department_name) VALUES (?, ?, ?)', [res.title, res.salary, res.department_name], function (err, res){
         if (err) throw err;
         console.log("Role Successfully Added");
+        beginApp();
     })
-    beginApp();
 })
 }
 
