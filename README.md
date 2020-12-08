@@ -63,6 +63,12 @@ No tests required for this project.
 
 ---
 
+## 📷 SCREEN SHOTS
+
+![EXAMPLE-TABLE](/assets/table.png)
+
+---
+
 ## ❔ QUESTIONS
 
 If any questions concerning the use of the markdown file contact me at ✉️ [Email](kjhallam321@gmail.com).
