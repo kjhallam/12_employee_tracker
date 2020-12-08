@@ -125,7 +125,7 @@ const removeEmployee = () => {
         name: "firstName"
         }
     ]).then((res) => {
-        connection.query('DELETE FROM employee WHERE first_name (?);', [res.firstName], 
+        connection.query('DELETE FROM employee WHERE first_name = (?)', [res.firstName], 
         function(err, res){
             if (err) throw err;
             console.log("Successfully Deleted");
