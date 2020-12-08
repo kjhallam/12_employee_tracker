@@ -34,9 +34,6 @@ const beginApp = () => {
             case 'Update Employee Role':
                 updateRole();
                 break;
-            case 'Update Employee Manager':
-                updateEmpMgr();
-                break;
             case 'Add Department':
                 addDept();
                 break;
@@ -125,7 +122,7 @@ const removeEmployee = () => {
         name: "firstName"
         }
     ]).then((res) => {
-        connection.query('DELETE FROM employee WHERE first_name = (?)', [res.firstName], 
+        connection.query('DELETE FROM employee WHERE first_name = (?);', [res.firstName], 
         function(err, res){
             if (err) throw err;
             console.log("Successfully Deleted");
@@ -136,25 +133,38 @@ const removeEmployee = () => {
 }
 //Update Employee Role
 const updateRole = () => {
+    connection.query("SELECT * FROM employee", function(err, empData){
+        connection.query("SELECT * FROM role", function(err, roleData){
+            let employees = empData.map((e) => e.first_name + " " + e.last_name);
+            let roles = roleData.map((r) => r.title);
     inquirer.prompt([
     {
-        type: "input",
+        type: "list",
         message: "Which employee would you like to update?",
-        name: "name"
+        name: "name",
+        choices: employees,
     },
     {
-        type: "number",
-        message: "Enter new role ID: ",
-        name: "role_id"
+        type: "list",
+        message: "Select a new role:",
+        name: "title",
+        choices: roles,
     }
-]).then(function(response) {
-    connection.query("UPDATE employee SET role_id = ? WHERE first_name = ?", [response.role_id, response.name],
-        function (err, res) {
-            table.printTable(res);
+]).then((response) => {
+    let empObj = empData.find((employee) => employee.first_name + " " + employee.last_name === response.employee);
+    let roleObj = roleData.find((role) => role.title === response.title);
+    // Issue with Update employee (id not a function???)
+    connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [roleObj.id, empObj.id],
+        function (err) {
+            console.log("Successful Updated Employee Role");
+            console.log(" ");
             beginApp();
         })
     })
- }
+  })
+})
+};
+
 // Update Employee Manager
 const updateEmpMgr = () => {
     inquirer.prompt([
@@ -212,7 +222,7 @@ const addRole = () => {
         name: 'department_id',
     },
 ]).then((res) => {
-    connection.query('INSERT INTO role (title, salary, department_name) VALUES (?, ?, ?)', [res.title, res.salary, res.department_name], function (err, res){
+    connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [res.title, res.salary, res.department_id], function (err, res){
         if (err) throw err;
         console.log("Role Successfully Added");
         beginApp();
