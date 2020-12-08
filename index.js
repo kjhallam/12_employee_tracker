@@ -121,11 +121,11 @@ const removeEmployee = () => {
     inquirer.prompt([
         {
         type: "input",
-        message: "Which employee would you like to remove?",
-        name: "title"
+        message: "Which employee would you like to remove? (enter first name only)",
+        name: "firstName"
         }
     ]).then((res) => {
-        connection.query('DELETE FROM employee WHERE (?);', [res.employee], 
+        connection.query('DELETE FROM employee WHERE first_name (?);', [res.firstName], 
         function(err, res){
             if (err) throw err;
             console.log("Successfully Deleted");
