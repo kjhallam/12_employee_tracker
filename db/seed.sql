@@ -20,3 +20,4 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Toni"
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("James", "Jameson", 3, 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Tiffani", "Kicksey", 2, 4);
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Jimmy", "Bob", 6, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Michael", "Jordan", 7, null);
