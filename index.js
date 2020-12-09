@@ -151,9 +151,8 @@ const updateRole = () => {
         choices: roles,
     }
 ]).then((response) => {
-    let empObj = empData.find((employee) => employee.first_name + " " + employee.last_name === response.employee);
+    let empObj = empData.find((employee) => (employee.first_name + " " + employee.last_name) === response.name);
     let roleObj = roleData.find((role) => role.title === response.title);
-    // Issue with Update employee (id not a function???)
     connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [roleObj.id, empObj.id],
         function (err) {
             console.log("Successful Updated Employee Role");
