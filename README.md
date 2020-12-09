@@ -61,6 +61,8 @@ No tests required for this project.
 
 ## 🎥 PREVIEW
 
+![Preview-Table](/assets/table_video.gif)
+
 ---
 
 ## 📷 SCREEN SHOTS
